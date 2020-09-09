@@ -1,0 +1,19 @@
+.snackbar-container .action {
+  font-family: 'Poppins','Open Sans', Helvetica, Arial, sans-serif;;
+  color: #4caf50;
+  line-height: 1.8em !important;
+  cursor: pointer;
+  margin-top: 0 !important;
+  background: #36353A !important;
+  border: 1px rgba(255,255,255,.2) solid !important;
+}
+
+@media (min-width:640px) {
+  .snackbar-container {
+    min-width: 288px !important;
+    max-width: 568px;
+    border-radius: 2px;
+    margin: 24px
+  }
+}
+

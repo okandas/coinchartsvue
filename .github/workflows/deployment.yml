@@ -1,0 +1,74 @@
+name: Deployment
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  IMAGE_NAME: toramari-frontend
+  REGISTRY: ghcr.io
+  SERVICE_NAME: toramari-f-service
+  DELETE_SERVICE_NAME: delete-toramari-f-service
+
+jobs:
+  
+  build:
+    name: Build
+  
+    runs-on: ubuntu-latest
+    steps:
+    
+    - run: echo "IMAGE_TAG=${GITHUB_REF:10}" >> $GITHUB_ENV
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+  
+    - name: Cache Docker layers
+      uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: ${{ runner.os }}-buildx-
+
+    - name: Login to Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.CRT_PAT }}
+
+    - name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+
+  deploy:
+    # Ensure build job passes before deploying image
+    name: Deploy after container update
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - run: echo "IMAGE_TAG=${GITHUB_REF:10}" >> $GITHUB_ENV
+
+    - name: Runs docker container
+      uses: fifsky/ssh-action@master
+      with:
+        command: |
+           echo ${{ secrets.CRT_PAT }} | docker login --username ${{ github.repository_owner }} --password-stdin ${{ env.REGISTRY }}
+           echo ${{ secrets.PAJECHA_HOSTED_BY_WEBDEV_PASS }} | sudo -S docker rename ${{ env.SERVICE_NAME }} ${{ env.DELETE_SERVICE_NAME }} && docker rm -f ${{ env.DELETE_SERVICE_NAME }}
+           echo ${{ secrets.PAJECHA_HOSTED_BY_WEBDEV_PASS }} | sudo -S docker run -d --name ${{ env.SERVICE_NAME }} -p 8081:80  --network toramari ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG}}
+        host: ${{ secrets.PAJECHA_HOSTED_BY_WEBDEV }}
+        user: administrator
+        pass: ${{ secrets.PAJECHA_HOSTED_BY_WEBDEV_PASS }}

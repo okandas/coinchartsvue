@@ -1,0 +1,14 @@
+{
+  auto_https off
+}
+
+:8081 {
+
+  root * /app/dist
+  file_server
+
+  tls internal
+
+  try_files {path} {path}/ /index.html
+  
+}

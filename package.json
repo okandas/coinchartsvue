@@ -1,6 +1,6 @@
 {
   "name": "toramari",
-  "version": "0.1.0",
+  "version": "0.1.32",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,16 +9,35 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@braid/vue-formulate": "^2.4.3",
+    "@types/d3": "^5.7.2",
+    "@types/js-cookie": "^2.2.6",
+    "@types/jwt-decode": "^2.2.1",
+    "axios": "^0.19.2",
+    "comlink": "^4.3.0",
     "core-js": "^3.6.5",
+    "currency-formatter": "^1.5.6",
+    "d3": "^5.16.0",
+    "d3-interpolate-path": "^2.2.1",
+    "js-cookie": "^2.2.1",
+    "jwt-decode": "^2.2.0",
+    "libphonenumber-js": "^1.7.56",
+    "lodash.get": "^4.4.2",
     "register-service-worker": "^1.7.1",
+    "v-tooltip": "2.0.2",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
+    "vue-meta": "^2.4.0",
     "vue-property-decorator": "^8.4.2",
     "vue-router": "^3.2.0",
-    "vuex": "^3.4.0"
+    "vue-toasted": "^1.1.28",
+    "vuex": "^3.4.0",
+    "vuex-module-decorators": "^0.17.0"
   },
   "devDependencies": {
+    "@types/d3-interpolate-path": "^2.0.0",
     "@types/jest": "^24.0.19",
+    "@types/lodash.get": "^4.4.6",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.4.0",

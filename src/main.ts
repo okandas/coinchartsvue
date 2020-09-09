@@ -4,6 +4,37 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 
+import Toasted from 'vue-toasted'
+import VTooltip from 'v-tooltip'
+import VueFormulate from '@braid/vue-formulate'
+import VueMeta from 'vue-meta'
+
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
+
+Vue.use(Toasted, {
+  position: 'bottom-left',
+  keepOnHover: true,
+  singleton: true,
+  className: 'action',
+  containerClass: 'snackbar-container',
+  duration: 5000
+})
+Vue.use(VueMeta)
+Vue.use(VTooltip)
+Vue.use(VueFormulate, {
+  rules: {
+    phoneNumber: (value: string) => {
+      const phoneNumber = parsePhoneNumberFromString(value, 'ZW')
+
+      if (phoneNumber !== undefined) {
+        return phoneNumber.isValid()
+      }
+
+      return false
+    }
+  }
+})
+
 Vue.config.productionTip = false
 
 new Vue({
