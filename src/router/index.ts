@@ -7,7 +7,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: 'coins',
-    component: () => import(/* webpackChunkName: "signup" */ '../views/CoinCharts.vue')
+    component: () => import(/* webpackChunkName: "signup" */ '../views/Coincharts.vue')
   },
   {
     path: '*',
