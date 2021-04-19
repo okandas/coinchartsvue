@@ -47,14 +47,14 @@ import { Component, Vue } from 'vue-property-decorator'
 import currencyFormatter from 'currency-formatter'
 
 @Component({
-components: {
-  PriceChart,
-  CryptoCurrencyTabs,
-  DocumentHead,
-  DurationTabs,
-  LetterHead,
-  PriceTable
-}
+  components: {
+    PriceChart,
+    CryptoCurrencyTabs,
+    DocumentHead,
+    DurationTabs,
+    LetterHead,
+    PriceTable
+  }
 })
 
 export default class CoinCharts extends Vue {

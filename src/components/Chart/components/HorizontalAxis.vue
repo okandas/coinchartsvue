@@ -21,7 +21,6 @@ import { timeFormat } from 'd3-time-format'
 
 @Component
 export default class HorizontalAxis extends Vue {
-    
     @Prop({ required: true, type: Array }) data!: Array<PriceData>
     @Prop({
       required: true,
