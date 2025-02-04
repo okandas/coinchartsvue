@@ -5,7 +5,8 @@
 [![License](https://aegisbadges.appspot.com/static?subject=license&status=MIT&color=4E5C6D)](https://opensource.org/licenses/MIT)
 
 Coincharts is a cryptocurrency price chart based off [Coinbase](https://www.coinbase.com/)'s original price chart on [https://www.coinbase.com/charts](https://web.archive.org/web/20190331085909/https://www.coinbase.com/charts)
-and is a [Vue.js](https://vuejs.org/) port of the [React.js](https://reactjs.org/) app by [tohjustin](https://github.com/tohjustin/coincharts)
+and is a [Vue.js](https://vuejs.org/) port built by [okandas](https://github.com/okandas)
+  of the [React.js](https://reactjs.org/) app by [tohjustin](https://github.com/tohjustin/coincharts)
 
 <p align="center">
   <img src="./docs/screenshot.png">
